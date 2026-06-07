@@ -137,3 +137,4 @@ site/
 
 # LARGE MEDIA (use Demo Screenshots/ instead)
 *.mp4
+!AuraHR Demo Video.mp4
