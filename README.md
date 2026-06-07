@@ -30,14 +30,14 @@ _Enterprise-grade Human Resource Management System powered by cutting-edge AI te
 
 A short product demo video is available to help you quickly understand AuraHR's core features (recruitment, AI screening, performance dashboards, and development plans).
 
-- `AuraHR Demo Video.mp4` :- [View Demo Video](./AuraHR%20Demo%20Video.mp4)
+
 
 <video width="800" controls>
   <source src="./AuraHR%20Demo%20Video.mp4" type="video/mp4">
   <p>Your browser does not support HTML5 video. You can download the demo: <a href="./AuraHR%20Demo%20Video.mp4">Download Demo Video</a> or watch it on <a href="https://drive.google.com/file/d/1D5WMNyfPaUsWGriTvKjdA-IWPIJPngoh/view?usp=sharing">Google Drive</a>.</p>
 </video>
 
-- Hosted demo (Google Drive): https://drive.google.com/file/d/1D5WMNyfPaUsWGriTvKjdA-IWPIJPngoh/view?usp=sharing
+- Hosted demo (Google Drive): https://drive.google.com/file/d/13mJWDma9Aw8cB5pQ5ECbC-BEG47Zkmh7/view?usp=sharing
 
 ## 📸 Demo Screenshots
 
