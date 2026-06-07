@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="AuraHR favicon">
+  <rect width="64" height="64" rx="12" fill="#0066CC" />
+  <g transform="translate(0,3)">
+    <path d="M20 44 L28 20 L36 44 L32 44 L30 36 L26 36 L24 44 Z" fill="#FFFFFF"/>
+    <path d="M40 44 L46 44 L46 36 L50 36 L50 32 L46 32 L46 28 L50 28 L50 24 L46 24 L46 20 L40 20 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+{
+  "name_patterns": {
+    "common_prefixes": ["pk", "mr", "ms", "dr", "prof", "sir", "madam"],
+    "common_first_names": [
+      "john", "james", "robert", "mary", "david", "sarah", "mike", "alice",
+      "pranav", "raj", "amit", "priya", "rahul", "ankita", "vikash", "neha",
+      "michael", "william", "richard", "joseph", "thomas", "christopher", "charles",
+      "daniel", "matthew", "anthony", "mark", "donald", "steven", "paul",
+      "andrew", "joshua", "kenneth", "kevin", "brian", "george", "timothy",
+      "ronald", "jason", "edward", "jeffrey", "ryan", "jacob", "gary",
+      "nicholas", "eric", "jonathan", "stephen", "larry", "justin", "scott"
+    ],
+    "common_last_names": [
+      "smith", "johnson", "williams", "brown", "jones", "davis", "miller",
+      "kapoor", "sharma", "patel", "singh", "kumar", "gupta", "agarwal",
+      "wilson", "moore", "taylor", "anderson", "thomas", "jackson", "white",
+      "harris", "martin", "thompson", "garcia", "martinez", "robinson", "clark",
+      "rodriguez", "lewis", "lee", "walker", "hall", "allen", "young",
+      "hernandez", "king", "wright", "lopez", "hill", "scott", "green",
+      "adams", "baker", "gonzalez", "nelson", "carter", "mitchell", "perez"
+    ],
+    "non_name_patterns": [
+      "admin", "test", "user", "info", "mail", "contact", "support", "help",
+      "software", "developer", "engineer", "manager", "analyst", "consultant",
+      "computer", "science", "technology", "system", "application"
+    ],
+    "education_keywords": [
+      "vidyalaya", "school", "college", "university", "cbse", "board", "class",
+      "standard", "grade", "xii", "x", "12th", "10th", "education", "qualification",
+      "institute", "academy", "centre", "center"
+    ]
+  },
+  "location_patterns": {
+    "major_cities": {
+      "india": [
+        "bengaluru", "bangalore", "mumbai", "delhi", "chennai", "kolkata",
+        "hyderabad", "pune", "ahmedabad", "surat", "jaipur", "lucknow",
+        "kanpur", "nagpur", "indore", "thane", "bhopal", "visakhapatnam",
+        "pimpri chinchwad", "patna", "vadodara", "ghaziabad", "ludhiana",
+        "agra", "nashik", "faridabad", "meerut", "rajkot", "kalyan dombivali"
+      ],
+      "usa": [
+        "new york", "los angeles", "chicago", "houston", "phoenix", "philadelphia",
+        "san antonio", "san diego", "dallas", "san jose", "austin", "jacksonville",
+        "fort worth", "columbus", "charlotte", "san francisco", "indianapolis",
+        "seattle", "denver", "washington", "boston", "el paso", "detroit"
+      ],
+      "global": [
+        "london", "paris", "berlin", "madrid", "rome", "amsterdam", "brussels",
+        "vienna", "stockholm", "oslo", "copenhagen", "helsinki", "dublin",
+        "toronto", "vancouver", "montreal", "sydney", "melbourne", "perth"
+      ]
+    },
+    "country_patterns": ["india", "usa", "uk", "canada", "australia", "germany", "france"],
+    "city_suffixes": ["uru", "bad", "abad", "nagar", "puram", "ganj"]
+  }
+}

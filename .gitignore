@@ -1,0 +1,139 @@
+.env
+.env.local
+.env.production
+!.env.example
+!.env.*.example
+*.pem
+*.p8
+*.p12
+*.key
+*.crt
+secrets/
+credentials/
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+*.joblib
+*.pkl
+*.model
+chroma_db/
+chromadb_data/
+embeddings_cache/
+model_cache/
+
+uploads/
+temp/
+cache/
+user_data/
+resumes/
+documents/
+
+# LOGS
+logs/
+*.log
+*.log.*
+*.out
+
+
+# DATABASE
+*.db
+*.sqlite
+*.sqlite3
+database/
+mongo_data/
+
+# IDE & EDITORS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS GENERATED
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# NODE.JS (Frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.pnpm-debug.log*
+
+# FRONTEND BUILD
+/frontend/dist/
+/frontend/build/
+/frontend/.next/
+/frontend/out/
+/frontend/.vite/
+/frontend/.parcel-cache/
+
+# FRONTEND DEVELOPMENT
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+/frontend/.eslintcache
+/frontend/.stylelintcache
+/frontend/storybook-static/
+
+# PACKAGE MANAGER
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TESTING
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.coverage.*
+
+# DOCUMENTATION BUILD
+docs/_build/
+site/
+
+# JUPYTER NOTEBOOKS
+.ipynb_checkpoints
+
+# BACKUP FILES
+*.bak
+*.backup
+*.orig
+
+# LARGE MEDIA (use Demo Screenshots/ instead)
+*.mp4

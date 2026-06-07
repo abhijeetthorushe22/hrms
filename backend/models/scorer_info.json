@@ -1,0 +1,12 @@
+{
+  "feature_names": [
+    "similarity_score",
+    "job_length",
+    "candidate_length"
+  ],
+  "model_type": "LogisticRegression",
+  "training_examples": 20,
+  "test_auc": 0.0,
+  "cv_auc_mean": NaN,
+  "cv_auc_std": NaN
+}

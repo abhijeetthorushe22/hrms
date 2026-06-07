@@ -1,0 +1,64 @@
+{
+  "ai_prompts": {
+    "development_plan": {
+      "system_prompt": "You are an expert corporate career coach. Your task is to create a concise, actionable development plan based on the provided JSON data. Analyze the employee's role, their stated career goals, their skills, and the verbatim feedback from their latest performance review. Identify 2-3 key skill gaps or areas for growth. For each area, suggest one specific, publicly available online course or resource, and one practical action they can take within their company.",
+      "response_format": "{ \"growthAreas\": [ { \"area\": \"<Name of Skill Gap>\", \"justification\": \"<Briefly explain why this is a gap based on the data>\", \"learningResources\": [\"<Resource Name and URL>\"], \"internalActions\": [\"<Specific internal action>\"] } ] }",
+      "fallback_plan": {
+        "growthAreas": [
+          {
+            "area": "Professional Development",
+            "justification": "Continuous learning is essential for career growth",
+            "learningResources": ["LinkedIn Learning - Professional Development courses"],
+            "internalActions": ["Schedule regular one-on-ones with manager"]
+          },
+          {
+            "area": "Technical Skills",
+            "justification": "Staying current with technology trends",
+            "learningResources": ["Coursera - Technical Skills for your role"],
+            "internalActions": ["Join internal technical communities or forums"]
+          }
+        ]
+      }
+    },
+    "screening_questions": {
+      "instructions": "As an expert recruiter, generate 5 relevant screening questions for a candidate based on their resume and the job description. The questions should be: 1. Specific to the role and candidate's background 2. Designed to assess fit and competency 3. Open-ended to encourage detailed responses 4. Professional and engaging",
+      "response_format": "[\"Question 1\", \"Question 2\", \"Question 3\", \"Question 4\", \"Question 5\"]",
+      "fallback_questions": [
+        "Can you tell me about your relevant experience for this position?",
+        "What interests you most about this role and our company?",
+        "Describe a challenging project you've worked on and how you handled it.",
+        "How do you stay current with industry trends and best practices?",
+        "What are your career goals and how does this position align with them?"
+      ]
+    },
+    "chat_response": {
+      "instructions": "You are an experienced HR recruiter conducting a screening interview. Be professional, friendly, and engaging. Ask follow-up questions based on the candidate's responses. Keep responses concise but thorough.",
+      "fallback_responses": [
+        "Thank you for sharing that. Could you tell me more about your experience with this technology?",
+        "That's interesting. How do you handle challenging situations in your work?",
+        "Can you describe a project you're particularly proud of?",
+        "What motivates you in your professional career?",
+        "How do you stay updated with industry trends and best practices?"
+      ]
+    },
+    "resume_scoring": {
+      "system_prompt": "You are an expert HR analyst. Analyze the resume against the job requirements and provide detailed scoring. Focus on: - Skills alignment with job requirements - Experience relevance and depth - Education and certifications fit - Overall candidate potential - Identify specific gaps and strengths",
+      "scoring_criteria": {
+        "skills_weight": 0.4,
+        "experience_weight": 0.35,
+        "education_weight": 0.15,
+        "achievements_weight": 0.1
+      },
+      "response_format": "{ \"resumeScore\": <number>, \"skillsMatch\": <number>, \"experienceMatch\": <number>, \"overallScore\": <number>, \"strengths\": [\"strength 1\", \"strength 2\", \"strength 3\"], \"weaknesses\": [\"weakness 1\", \"weakness 2\"], \"aiInsights\": [\"insight 1\", \"insight 2\"] }",
+      "fallback_scoring": {
+        "resumeScore": 75,
+        "skillsMatch": 70,
+        "experienceMatch": 80,
+        "overallScore": 75,
+        "strengths": ["Relevant technical skills", "Professional experience", "Good educational background"],
+        "weaknesses": ["Could benefit from more specific examples", "Additional certifications recommended"],
+        "aiInsights": ["Strong technical foundation with room for specialization", "Well-suited for mid-level positions"]
+      }
+    }
+  }
+}

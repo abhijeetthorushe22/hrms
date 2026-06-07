@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: aurahr-backend
+    env: python
+    region: oregon
+    plan: starter
+    rootDir: backend
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt && python -m spacy download en_core_web_sm"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips='*'"
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CHROMA_PERSIST_DIRECTORY
+        value: ./chroma_db
+      - key: UPLOAD_DIR
+        value: ./uploads
+      - key: INIT_AI_ON_STARTUP
+        value: "false"
+      - key: ENABLE_SPACY_PROCESSING
+        value: "true"
+      - key: ENABLE_GEMINI_FALLBACK
+        value: "true"
+      - key: ENABLE_ML_CLASSIFIER
+        value: "true"
+      - key: ENABLE_DOCS
+        value: "true"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: true
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GEMINI_MODEL_NAME
+        value: "gemini-2.0-flash"
+      - key: FRONTEND_URL
+        sync: false
+      - key: ENABLE_ENTITY_EXTRACTION
+        value: "true"
+      - key: ENABLE_ADVANCED_PDF
+        value: "true"
+      - key: PYTHON_VERSION
+        value: "3.11.10"

@@ -1,0 +1,62 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+aiofiles>=23.0.0
+
+# SECURITY & AUTHENTICATION
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-dotenv>=1.0.0
+
+# DATABASE DRIVERS
+motor>=3.3.0
+pymongo>=4.6.0
+
+# PRIMARY AI ENGINE - HuggingFace (Core Dependencies)
+sentence-transformers>=2.2.0
+transformers>=4.35.0
+torch>=2.1.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+joblib>=1.3.0
+scipy>=1.11.0
+
+# VECTOR DATABASE
+chromadb>=0.4.15
+
+# OPTIONAL AI FEATURES (Can be disabled via config)
+# spaCy for entity extraction (optional)
+spacy>=3.7.0
+# Google Gemini for fallback chat features (optional)  
+google-generativeai>=0.3.0
+
+# FILE PROCESSING UTILITIES
+# PDF text extraction (prioritized)
+pypdf2>=3.0.0
+pdfplumber>=0.10.0
+pymupdf>=1.23.0
+# Document processing
+python-docx>=1.1.0
+pillow>=10.0.0
+
+# DATA VALIDATION & CONFIGURATION
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+email-validator>=1.3.0
+
+# HTTP CLIENT & UTILITIES
+httpx>=0.25.0
+
+# OPTIONAL BACKGROUND PROCESSING
+# Note: Enable only if needed for large-scale operations
+# celery>=5.3.0
+# redis>=5.0.0
+
+# DEVELOPMENT & TESTING (Optional)
+# Uncomment for development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0

@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Core Colors - AI-First Palette */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* Primary: Deep Indigo (AI Intelligence) */
+    --primary: 238 67% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 238 67% 63%;
+    
+    /* Secondary: Vibrant Teal (Growth) */
+    --secondary: 173 58% 39%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-glow: 173 58% 49%;
+    
+    /* Accent: Coral/Orange (Action) */
+    --accent: 21 90% 48%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 21 90% 58%;
+    
+    /* Success: Emerald */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    /* Warning: Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    /* Muted & Neutral */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 238 67% 53%;
+    
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(238 67% 53%), hsl(173 58% 39%));
+    --gradient-hero: linear-gradient(135deg, hsl(238 67% 53%) 0%, hsl(173 58% 39%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(238 67% 53% / 0.05), hsl(173 58% 39% / 0.05));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 20px hsl(238 67% 53% / 0.3);
+    
+    /* Sidebar */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 238 67% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 18%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 238 67% 53%;
+    
+    /* Transitions */
+    --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 238 67% 63%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 173 58% 49%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 21 90% 58%;
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 238 67% 63%;
+    
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 238 67% 63%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 15%;
+    --sidebar-ring: 238 67% 63%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply backdrop-blur-lg border border-white/20 shadow-lg;
+    background-color: rgb(17 25 45 / 8%);
+  }
+  
+  .glass-dark {
+    @apply bg-card/80 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02];
+  }
+  
+  /* Glow effect */
+  .glow {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.4);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .glow:hover {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+  
+  /* Interactive elements */
+  .interactive-element {
+    @apply transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+  
+  /* Smooth hover lift */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 20px hsl(var(--primary) / 0.2);
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+  
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-in-left {
+    animation: slide-in-left 0.3s ease-out;
+  }
+  
+  @keyframes slide-in-left {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Focus visible for accessibility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  /* Smooth transitions */
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

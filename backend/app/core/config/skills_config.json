@@ -1,0 +1,98 @@
+{
+  "skills_database": {
+    "programming_languages": {
+      "python": ["python", "py", "python3", "django", "flask", "fastapi"],
+      "javascript": ["javascript", "js", "node.js", "nodejs", "node", "es6", "es2015", "ecmascript"],
+      "java": ["java", "java8", "java11", "java17", "jvm", "spring boot", "maven", "gradle"],
+      "typescript": ["typescript", "ts", "angular", "nest.js", "nestjs"],
+      "c++": ["c++", "cpp", "c plus plus", "cplusplus"],
+      "c#": ["c#", "csharp", "c sharp", ".net", "dotnet", "asp.net"],
+      "php": ["php", "laravel", "symfony", "codeigniter", "wordpress"],
+      "ruby": ["ruby", "ruby on rails", "rails", "sinatra"],
+      "go": ["go", "golang", "go lang"],
+      "rust": ["rust", "rust lang"],
+      "swift": ["swift", "ios development", "xcode"],
+      "kotlin": ["kotlin", "android development"],
+      "scala": ["scala", "akka", "play framework"],
+      "r": ["r programming", "r language", "rstudio"],
+      "sql": ["sql", "mysql", "postgresql", "sqlite", "t-sql", "pl/sql"]
+    },
+    "frontend_technologies": {
+      "react": ["react", "reactjs", "react.js", "jsx", "react native"],
+      "angular": ["angular", "angularjs", "angular2", "angular4", "typescript"],
+      "vue": ["vue", "vue.js", "vuejs", "nuxt.js", "vuex"],
+      "html": ["html", "html5", "markup", "semantic html"],
+      "css": ["css", "css3", "sass", "scss", "less", "stylus", "tailwind"],
+      "jquery": ["jquery", "jquery ui"]
+    },
+    "backend_technologies": {
+      "node.js": ["node.js", "nodejs", "node", "express.js", "express"],
+      "django": ["django", "python", "django rest framework"],
+      "flask": ["flask", "python", "jinja2"],
+      "spring": ["spring", "spring boot", "spring mvc", "spring security"],
+      "laravel": ["laravel", "php", "eloquent", "blade"],
+      "ruby on rails": ["rails", "ruby on rails", "ruby", "activerecord"],
+      "asp.net": ["asp.net", ".net", "mvc", "web api", "c#"]
+    },
+    "databases": {
+      "mongodb": ["mongodb", "mongo", "nosql", "mongoose"],
+      "postgresql": ["postgresql", "postgres", "sql"],
+      "mysql": ["mysql", "sql", "mariadb"],
+      "redis": ["redis", "cache", "in-memory"],
+      "elasticsearch": ["elasticsearch", "elastic", "elk stack", "search"],
+      "oracle": ["oracle", "oracle db", "pl/sql"],
+      "sqlite": ["sqlite", "sql"],
+      "cassandra": ["cassandra", "nosql", "distributed database"]
+    },
+    "cloud_platforms": {
+      "aws": ["aws", "amazon web services", "ec2", "s3", "lambda", "rds", "cloudformation"],
+      "azure": ["azure", "microsoft azure", "azure functions", "azure sql"],
+      "google cloud": ["gcp", "google cloud platform", "google cloud", "firebase"],
+      "docker": ["docker", "containerization", "dockerfile"],
+      "kubernetes": ["kubernetes", "k8s", "container orchestration"]
+    },
+    "devops_tools": {
+      "git": ["git", "github", "gitlab", "bitbucket", "version control"],
+      "jenkins": ["jenkins", "ci/cd", "continuous integration"],
+      "terraform": ["terraform", "infrastructure as code", "iac"],
+      "ansible": ["ansible", "configuration management", "automation"],
+      "linux": ["linux", "unix", "ubuntu", "centos", "debian", "bash"]
+    },
+    "data_science_ai": {
+      "machine learning": ["machine learning", "ml", "artificial intelligence", "ai"],
+      "deep learning": ["deep learning", "neural networks", "cnn", "rnn"],
+      "data science": ["data science", "data analysis", "statistics"],
+      "pandas": ["pandas", "python", "data manipulation"],
+      "numpy": ["numpy", "python", "numerical computing"],
+      "scikit-learn": ["scikit-learn", "sklearn", "machine learning"],
+      "tensorflow": ["tensorflow", "deep learning", "neural networks"],
+      "pytorch": ["pytorch", "deep learning", "neural networks"],
+      "jupyter": ["jupyter", "jupyter notebook", "ipython"]
+    },
+    "testing": {
+      "testing": ["testing", "unit testing", "integration testing", "tdd", "bdd"],
+      "jest": ["jest", "javascript testing", "testing framework"],
+      "pytest": ["pytest", "python testing", "testing"],
+      "selenium": ["selenium", "automated testing", "web testing"]
+    },
+    "soft_skills": {
+      "agile": ["agile", "scrum", "kanban", "sprint"],
+      "scrum": ["scrum", "agile", "scrum master"],
+      "project management": ["project management", "pmp", "project coordination"],
+      "leadership": ["leadership", "team lead", "management"],
+      "communication": ["communication", "presentation", "documentation"]
+    },
+    "mobile_development": {
+      "android": ["android", "kotlin", "java", "android studio"],
+      "ios": ["ios", "swift", "objective-c", "xcode"],
+      "react native": ["react native", "mobile development", "cross-platform"],
+      "flutter": ["flutter", "dart", "mobile development"]
+    },
+    "other_technologies": {
+      "graphql": ["graphql", "apollo", "relay"],
+      "rest api": ["rest", "restful", "api", "web services"],
+      "microservices": ["microservices", "distributed systems", "service oriented"],
+      "blockchain": ["blockchain", "bitcoin", "ethereum", "solidity"]
+    }
+  }
+}
