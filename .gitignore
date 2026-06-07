@@ -112,9 +112,7 @@ yarn-error.log*
 /frontend/storybook-static/
 
 # PACKAGE MANAGER
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# Note: lock files (package-lock.json, yarn.lock) should be committed for reproducible builds
 
 # TESTING
 .coverage
