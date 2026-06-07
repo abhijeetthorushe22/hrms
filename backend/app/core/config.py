@@ -45,14 +45,14 @@ class Settings(BaseSettings):
     
     LOG_LEVEL: str = "INFO"
     
-    ENABLE_SPACY_PROCESSING: bool = True
+    ENABLE_SPACY_PROCESSING: bool = False
     ENABLE_GEMINI_FALLBACK: bool = False
     ENABLE_ADVANCED_PDF: bool = True
-    ENABLE_ML_CLASSIFIER: bool = True
+    ENABLE_ML_CLASSIFIER: bool = False
     ENABLE_ENTITY_EXTRACTION: bool = True
     
-    #  Initialize AI services on startup
-    INIT_AI_ON_STARTUP: bool = True 
+    #  Initialize AI services on startup (off by default for low-memory hosts)
+    INIT_AI_ON_STARTUP: bool = False 
     
     DEBUG: bool = False
     RELOAD: bool = True

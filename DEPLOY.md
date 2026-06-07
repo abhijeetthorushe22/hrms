@@ -104,6 +104,8 @@ ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ENABLE_GEMINI_FALLBACK=true
 INIT_AI_ON_STARTUP=false
+ENABLE_SPACY_PROCESSING=false
+ENABLE_ML_CLASSIFIER=false
 ENVIRONMENT=production
 ```
 
@@ -131,7 +133,7 @@ VITE_API_URL=https://your-backend.onrender.com/api
 | Login fails / CORS error | Set `FRONTEND_URL` in Render to exact Vercel URL (no trailing slash) |
 | API 404 on frontend | Check `VITE_API_URL` ends with `/api` |
 | Backend slow first request | Normal on free/starter tier; models load lazily |
-| Render build times out / OOM | CPU-only torch is installed automatically via `render.yaml`; if still failing, set `ENABLE_ML_CLASSIFIER=false` and `ENABLE_SPACY_PROCESSING=false` |
+| Render build times out / OOM | Render uses `requirements-render.txt` (no spaCy) with `ENABLE_SPACY_PROCESSING=false` and `ENABLE_ML_CLASSIFIER=false` pre-set in `render.yaml` for the 512MB plan |
 | JWT / auth errors after deploy | Ensure `ALGORITHM=HS256` and `ACCESS_TOKEN_EXPIRE_MINUTES=30` are set in Render env vars |
 | Gemini uses template replies | Check API key and quota in Google AI Studio |
 | `DATABASE_URL` not connecting | Use `sync: false` and manually paste MongoDB Atlas URI in Render dashboard |

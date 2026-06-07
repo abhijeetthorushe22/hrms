@@ -30,11 +30,6 @@ except ImportError:
     chromadb = None
     ChromaSettings = None
 try:
-    import spacy
-except ImportError:
-    spacy = None
-
-try:
     import google.generativeai as genai
 except ImportError:
     genai = None
@@ -159,8 +154,12 @@ class AIService:
             if ENABLE_SPACY_PROCESSING:
                 logger.info("🔤 Loading spaCy model (optional)...")
                 try:
+                    import spacy
                     self.nlp = spacy.load(settings.SPACY_MODEL_NAME)
                     logger.info(f"✅ spaCy model '{settings.SPACY_MODEL_NAME}' loaded successfully")
+                except ImportError:
+                    logger.warning("⚠️  spaCy not installed — using fallback extraction")
+                    self.nlp = None
                 except Exception as e:
                     logger.warning(f"⚠️  spaCy model not available (non-critical): {e}")
                     self.nlp = None
