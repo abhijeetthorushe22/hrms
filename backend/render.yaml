@@ -20,11 +20,11 @@ services:
       - key: INIT_AI_ON_STARTUP
         value: "false"
       - key: ENABLE_SPACY_PROCESSING
-        value: "true"
+        value: "false"
       - key: ENABLE_GEMINI_FALLBACK
         value: "true"
       - key: ENABLE_ML_CLASSIFIER
-        value: "true"
+        value: "false"
       - key: ENABLE_DOCS
         value: "true"
       - key: SECRET_KEY
