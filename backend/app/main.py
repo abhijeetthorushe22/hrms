@@ -6,7 +6,8 @@ import os
 
 from app.api.v1.api import api_router
 from app.core.config import settings
-from app.core.database import connect_to_mongo, close_mongo_connection
+from app.core.database import connect_to_mongo, close_mongo_connection, db
+from app.core.seed import seed_demo_users
 from app.services.ai_service import AIService
 
 app = FastAPI(
@@ -38,6 +39,7 @@ def _get_cors_origins() -> list:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_get_cors_origins(),
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD"],
     allow_headers=[
@@ -68,12 +70,20 @@ app.include_router(api_router, prefix=settings.API_STR)
 app.include_router(api_router, prefix="/api")  
 
 
-def _health_payload() -> dict:
+async def _health_payload() -> dict:
+    database_status = "disconnected"
+    if db.client is not None:
+        try:
+            await db.client.admin.command("ping")
+            database_status = "connected"
+        except Exception:
+            database_status = "error"
+
     return {
-        "status": "healthy",
+        "status": "healthy" if database_status == "connected" else "degraded",
         "version": settings.VERSION,
         "services": {
-            "database": "connected",
+            "database": database_status,
             "api": "ready",
         },
     }
@@ -84,7 +94,7 @@ def _health_payload() -> dict:
 @app.get(f"{settings.API_STR}/health")
 async def health_check():
     """Lightweight health check for Render and load balancers."""
-    return _health_payload()
+    return await _health_payload()
 
 
 @app.on_event("startup")
@@ -96,6 +106,8 @@ async def startup_event():
         print("[*] Connecting to MongoDB...")
         await connect_to_mongo()
         print("[OK] MongoDB connected successfully!")
+        await seed_demo_users(db.database)
+        print("[OK] Demo users ready!")
     except Exception as e:
         print(f"[ERROR] Failed to connect to MongoDB: {e}")        
     

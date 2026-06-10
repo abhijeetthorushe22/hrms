@@ -130,7 +130,8 @@ VITE_API_URL=https://your-backend.onrender.com/api
 
 | Problem | Fix |
 |---------|-----|
-| Login fails / CORS error | Set `FRONTEND_URL` in Render to exact Vercel URL (no trailing slash) |
+| Login fails / CORS error | Set `FRONTEND_URL` in Render to exact Vercel URL (no trailing slash). Vercel preview URLs (`*.vercel.app`) are allowed automatically |
+| Login returns 500 / "Login failed" | Ensure `DATABASE_URL` is set in Render. Open `/health` — `database` must be `"connected"`. Demo users are auto-seeded on startup |
 | API 404 on frontend | Check `VITE_API_URL` ends with `/api` |
 | Backend slow first request | Normal on free/starter tier; models load lazily |
 | Render build times out / OOM | Render uses `requirements-render.txt` (no spaCy) with `ENABLE_SPACY_PROCESSING=false` and `ENABLE_ML_CLASSIFIER=false` pre-set in `render.yaml` for the 512MB plan |

@@ -1,4 +1,7 @@
+import logging
 from fastapi import APIRouter, Depends, HTTPException, status
+
+logger = logging.getLogger(__name__)
 from fastapi.security import HTTPBearer
 from datetime import timedelta, datetime
 from typing import Any
@@ -32,7 +35,18 @@ async def login(user_credentials: UserLogin, db=Depends(get_database)):
         )
     
     # Verify password
-    if not verify_password(user_credentials.password, user_doc["password"]):
+    try:
+        password_valid = verify_password(
+            user_credentials.password, user_doc["password"]
+        )
+    except Exception as e:
+        logger.error("Password verification failed: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Authentication service misconfigured on server",
+        )
+
+    if not password_valid:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",

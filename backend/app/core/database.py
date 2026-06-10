@@ -1,5 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo.errors import ConnectionFailure
+from fastapi import HTTPException, status
 import logging
 from app.core.config import settings
 
@@ -25,8 +26,10 @@ async def connect_to_mongo():
         # Create indexes for better performance
         await create_indexes()
         
-    except ConnectionFailure as e:
+    except Exception as e:
         logger.error(f"Failed to connect to MongoDB: {e}")
+        db.client = None
+        db.database = None
         raise
 
 async def close_mongo_connection():
@@ -73,4 +76,9 @@ async def create_indexes():
 
 def get_database():
     """Get database instance."""
+    if db.database is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database unavailable. Check DATABASE_URL on the server.",
+        )
     return db.database
