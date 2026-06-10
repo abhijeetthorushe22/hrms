@@ -6,8 +6,8 @@ from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.core.config import settings
 
-# Password hashing - using argon2 instead of bcrypt to avoid compatibility issues
-pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+# Password hashing - bcrypt is fast, secure, and works well on low-CPU hosts like Render free tier
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # JWT token bearer
 security = HTTPBearer()
