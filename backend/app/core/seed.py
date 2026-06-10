@@ -15,26 +15,27 @@ DEMO_USERS = [
 
 
 async def seed_demo_users(db) -> None:
-    """Create demo users if they do not already exist."""
-    created = 0
+    """Upsert demo users with fresh password hashes on every startup.
+
+    Using upsert ensures that if the hashing scheme changes (e.g. bcrypt → argon2),
+    the stored hashes are always refreshed so logins never break after a migration.
+    """
     for user in DEMO_USERS:
-        existing = await db.users.find_one({"email": user["email"]})
-        if existing:
-            continue
-
-        await db.users.insert_one(
+        fresh_hash = get_password_hash(user["password"])
+        await db.users.update_one(
+            {"email": user["email"]},
             {
-                "email": user["email"],
-                "password": get_password_hash(user["password"]),
-                "role": user["role"],
-                "employeeId": None,
-                "createdAt": datetime.utcnow(),
-            }
+                "$set": {
+                    "password": fresh_hash,
+                    "role": user["role"],
+                },
+                "$setOnInsert": {
+                    "employeeId": None,
+                    "createdAt": datetime.utcnow(),
+                },
+            },
+            upsert=True,
         )
-        created += 1
-        logger.info("Seeded demo user: %s", user["email"])
+        logger.info("Upserted demo user: %s", user["email"])
 
-    if created:
-        logger.info("Created %s demo user(s)", created)
-    else:
-        logger.info("Demo users already present")
+    logger.info("Demo users ready (%d users)", len(DEMO_USERS))
