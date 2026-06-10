@@ -16,7 +16,14 @@ db = Database()
 async def connect_to_mongo():
     """Create database connection and initialize collections."""
     try:
-        db.client = AsyncIOMotorClient(settings.DATABASE_URL)
+        db.client = AsyncIOMotorClient(
+            settings.DATABASE_URL,
+            serverSelectionTimeoutMS=30000,
+            connectTimeoutMS=20000,
+            socketTimeoutMS=20000,
+            tls=True,
+            tlsAllowInvalidCertificates=False,
+        )
         db.database = db.client[settings.DATABASE_NAME]
         
         # Test the connection
