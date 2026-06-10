@@ -72,9 +72,12 @@ app.include_router(api_router, prefix="/api")
 
 async def _health_payload() -> dict:
     database_status = "disconnected"
-    if db.client is not None:
+    user_count = None
+
+    if db.database is not None:
         try:
             await db.client.admin.command("ping")
+            user_count = await db.database.users.estimated_document_count()
             database_status = "connected"
         except Exception:
             database_status = "error"
@@ -85,6 +88,7 @@ async def _health_payload() -> dict:
         "services": {
             "database": database_status,
             "api": "ready",
+            "demo_users": user_count,
         },
     }
 

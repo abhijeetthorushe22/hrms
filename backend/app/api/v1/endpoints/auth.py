@@ -23,9 +23,15 @@ security = HTTPBearer()
 @router.post("/login", response_model=Token)
 async def login(user_credentials: UserLogin, db=Depends(get_database)):
     """Authenticate user and return JWT token."""
-    
-    # Find user by email
-    user_doc = await db.users.find_one({"email": user_credentials.email})
+
+    try:
+        user_doc = await db.users.find_one({"email": user_credentials.email})
+    except Exception as e:
+        logger.error("Database query failed during login: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database query failed. Check MongoDB user permissions for the aurahr database.",
+        )
     
     if not user_doc:
         raise HTTPException(
@@ -132,17 +138,29 @@ async def get_current_user_profile(
 @router.post("/register", response_model=UserResponse)
 async def register_user(user_data: UserCreate, db=Depends(get_database)):
     """Register a new user (for testing purposes)."""
-    
-    # Check if user already exists
-    existing_user = await db.users.find_one({"email": user_data.email})
+
+    try:
+        existing_user = await db.users.find_one({"email": user_data.email})
+    except Exception as e:
+        logger.error("Database query failed during register: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database query failed. Check MongoDB user permissions for the aurahr database.",
+        )
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered"
         )
     
-    # Hash password
-    hashed_password = get_password_hash(user_data.password)
+    try:
+        hashed_password = get_password_hash(user_data.password)
+    except Exception as e:
+        logger.error("Password hashing failed during register: %s", e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Authentication service misconfigured on server",
+        )
     
     # Create user document
     user_doc = {

@@ -33,7 +33,7 @@ Deploy **backend** on Render and **frontend** on Vercel. Database stays on Mongo
 
 | Variable | Value |
 |----------|-------|
-| `DATABASE_URL` | Your MongoDB Atlas connection string |
+| `DATABASE_URL` | Your MongoDB Atlas connection string (user must have **readWrite** on the `aurahr` database) |
 | `GOOGLE_API_KEY` | Your Gemini API key |
 | `FRONTEND_URL` | Leave empty for now; set after Step 3 |
 
