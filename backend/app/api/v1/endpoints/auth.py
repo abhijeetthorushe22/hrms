@@ -72,7 +72,7 @@ async def login(user_credentials: UserLogin, db=Depends(get_database)):
         email=user_doc["email"],
         role=user_doc["role"],
         employee_id=str(user_doc.get("employeeId")) if user_doc.get("employeeId") else None,
-        created_at=user_doc["createdAt"]
+        created_at=user_doc.get("createdAt", datetime.utcnow())
     )
     
     return Token(
