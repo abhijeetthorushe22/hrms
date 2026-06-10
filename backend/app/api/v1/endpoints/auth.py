@@ -23,15 +23,24 @@ security = HTTPBearer()
 @router.post("/login", response_model=Token)
 async def login(user_credentials: UserLogin, db=Depends(get_database)):
     """Authenticate user and return JWT token."""
+    import asyncio
 
-    try:
-        user_doc = await db.users.find_one({"email": user_credentials.email})
-    except Exception as e:
-        logger.error("Database query failed during login: %s", e)
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Database query failed. Check MongoDB user permissions for the aurahr database.",
-        )
+    # Retry once on transient DB errors (e.g. Render cold-start, Atlas blip)
+    user_doc = None
+    for attempt in range(2):
+        try:
+            user_doc = await db.users.find_one({"email": user_credentials.email})
+            break
+        except Exception as e:
+            if attempt == 0:
+                logger.warning("DB transient error on login attempt 1, retrying: %s", e)
+                await asyncio.sleep(0.5)
+            else:
+                logger.error("Database query failed during login (attempt 2): %s", e)
+                raise HTTPException(
+                    status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                    detail="Service temporarily unavailable. Please try again in a few seconds.",
+                )
     
     if not user_doc:
         raise HTTPException(
@@ -40,11 +49,18 @@ async def login(user_credentials: UserLogin, db=Depends(get_database)):
             headers={"WWW-Authenticate": "Bearer"},
         )
     
+    # Guard: if password field is empty/None the seed hasn't finished yet
+    stored_hash = user_doc.get("password", "")
+    if not stored_hash:
+        logger.warning("Login attempted for %s but password hash is empty — seed may be in progress", user_credentials.email)
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Server is still starting up. Please try again in a few seconds.",
+        )
+    
     # Verify password
     try:
-        password_valid = verify_password(
-            user_credentials.password, user_doc["password"]
-        )
+        password_valid = verify_password(user_credentials.password, stored_hash)
     except Exception as e:
         logger.error("Password verification failed: %s", e)
         raise HTTPException(

@@ -38,37 +38,51 @@ export const useAuthStore = create<AuthState>()(
 
       login: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
-        try {
-          const response = await authApi.login({ email, password });
-          const user: User = {
-            id: response.user.id,
-            email: response.user.email,
-            role: response.user.role as UserRole,
-            employee_id: response.user.employee_id,
-            created_at: response.user.created_at,
-          };
 
-          set({
-            user,
-            token: response.access_token,
-            isAuthenticated: true,
-            isLoading: false,
-            error: null,
-          });
+        const attemptLogin = async (isRetry = false) => {
+          try {
+            const response = await authApi.login({ email, password });
+            const user: User = {
+              id: response.user.id,
+              email: response.user.email,
+              role: response.user.role as UserRole,
+              employee_id: response.user.employee_id,
+              created_at: response.user.created_at,
+            };
 
-          // Ensure token is available for immediate API calls after login
-          api.defaults.headers.common.Authorization = `Bearer ${response.access_token}`;
-        } catch (error: any) {
-          const errorMessage = error.response?.data?.detail || "Login failed";
-          set({
-            error: errorMessage,
-            isLoading: false,
-            isAuthenticated: false,
-            user: null,
-            token: null,
-          });
-          throw new Error(errorMessage);
-        }
+            set({
+              user,
+              token: response.access_token,
+              isAuthenticated: true,
+              isLoading: false,
+              error: null,
+            });
+
+            // Ensure token is available for immediate API calls after login
+            api.defaults.headers.common.Authorization = `Bearer ${response.access_token}`;
+          } catch (error: any) {
+            const statusCode = error.response?.status;
+
+            // 503 = server is warming up (Render cold start) — retry once automatically
+            if (statusCode === 503 && !isRetry) {
+              set({ error: "Server is warming up, retrying..." });
+              await new Promise((resolve) => setTimeout(resolve, 2500));
+              return attemptLogin(true);
+            }
+
+            const errorMessage = error.response?.data?.detail || "Login failed";
+            set({
+              error: errorMessage,
+              isLoading: false,
+              isAuthenticated: false,
+              user: null,
+              token: null,
+            });
+            throw new Error(errorMessage);
+          }
+        };
+
+        await attemptLogin();
       },
 
       register: async (email: string, password: string) => {

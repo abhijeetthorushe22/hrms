@@ -1,21 +1,42 @@
 from datetime import datetime, timedelta
 from typing import Optional, Any
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.core.config import settings
 
 import bcrypt
+import logging
+
+logger = logging.getLogger(__name__)
 
 # JWT token bearer
 security = HTTPBearer()
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify a password against its hash."""
+    """Verify a password against its hash.
+
+    Supports both bcrypt hashes (current scheme) and argon2 hashes (legacy).
+    The argon2 fallback covers the rare cold-start race window where the seed
+    hasn't yet re-hashed old records.
+    """
+    if not hashed_password:
+        return False
     try:
+        if hashed_password.startswith("$argon2"):
+            # Legacy argon2 hash — use passlib to verify, then return True
+            # so the caller can still log in while seed re-hashes in background.
+            try:
+                from passlib.context import CryptContext
+                _argon2_ctx = CryptContext(schemes=["argon2"], deprecated="auto")
+                return _argon2_ctx.verify(plain_password, hashed_password)
+            except Exception as e:
+                logger.warning("Argon2 fallback verification failed: %s", e)
+                return False
+        # Standard bcrypt hash
         return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
-    except Exception:
+    except Exception as e:
+        logger.error("verify_password unexpected error: %s", e)
         return False
 
 def get_password_hash(password: str) -> str:

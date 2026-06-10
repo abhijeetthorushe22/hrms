@@ -106,15 +106,29 @@ async def startup_event():
     """Initialize database connections and AI services on startup."""
     print("[*] Starting AuraHR initialization...")
     
+    # ------------------------------------------------------------------ #
+    # Step 1: Connect to MongoDB and seed users BEFORE accepting traffic.  #
+    # This ensures the health check and first login don't race the seed.   #
+    # ------------------------------------------------------------------ #
     try:
         print("[*] Connecting to MongoDB...")
         await connect_to_mongo()
         print("[OK] MongoDB connected successfully!")
-        await seed_demo_users(db.database)
-        print("[OK] Demo users ready!")
     except Exception as e:
-        print(f"[ERROR] Failed to connect to MongoDB: {e}")        
-    
+        print(f"[ERROR] Failed to connect to MongoDB: {e}")
+        # Don't exit — let Render see the app is up; /health will show degraded.
+
+    if db.database is not None:
+        try:
+            print("[*] Seeding demo users (awaiting completion before serving traffic)...")
+            await seed_demo_users(db.database)
+            print("[OK] Demo users ready!")
+        except Exception as e:
+            print(f"[WARN] Demo user seeding failed (non-fatal): {e}")
+
+    # ------------------------------------------------------------------ #
+    # Step 2: Optionally initialise AI models in background.              #
+    # ------------------------------------------------------------------ #
     try:
         from app.services.ai_service import ai_service
         
@@ -130,6 +144,7 @@ async def startup_event():
     
     print(f"[OK] {settings.PROJECT_NAME} started successfully!")
     print(f"[INFO] API Documentation: http://localhost:8000/docs")
+
 
 @app.on_event("shutdown")
 async def shutdown_event():
