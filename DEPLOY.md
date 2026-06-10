@@ -41,7 +41,7 @@ Deploy **backend** on Render and **frontend** on Vercel. Database stays on Mongo
 
 5. Click **Apply** and wait for deploy (~10–20 min first time due to PyTorch download).
 6. Note your backend URL, e.g. `https://aurahr-backend.onrender.com`
-7. Test: open `https://aurahr-backend.onrender.com/health` — you should see `{"status":"ok"}`.
+7. Test the **Render backend URL** (not Vercel): `https://aurahr-backend.onrender.com/health` — you should see `{"status":"healthy",...}`.
 
 ### Seed demo data (optional)
 

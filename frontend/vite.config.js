@@ -35,6 +35,12 @@ export default defineConfig(({ command, mode }) => {
       open: isDev,
       cors: true,
       proxy: {
+        "/health": {
+          target:
+            env.VITE_API_URL?.replace("/api", "") || "http://localhost:8000",
+          changeOrigin: true,
+          secure: false,
+        },
         "/api": {
           target:
             env.VITE_API_URL?.replace("/api", "") || "http://localhost:8000",

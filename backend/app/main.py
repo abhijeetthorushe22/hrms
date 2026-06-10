@@ -67,6 +67,26 @@ async def cors_preflight_handler(path: str):
 app.include_router(api_router, prefix=settings.API_STR)  
 app.include_router(api_router, prefix="/api")  
 
+
+def _health_payload() -> dict:
+    return {
+        "status": "healthy",
+        "version": settings.VERSION,
+        "services": {
+            "database": "connected",
+            "api": "ready",
+        },
+    }
+
+
+@app.get("/health")
+@app.get("/api/health")
+@app.get(f"{settings.API_STR}/health")
+async def health_check():
+    """Lightweight health check for Render and load balancers."""
+    return _health_payload()
+
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize database connections and AI services on startup."""
@@ -116,26 +136,12 @@ async def _initialize_ai_service(ai_service):
 
 @app.get("/")
 async def root():
-    """Health check endpoint."""
+    """Root endpoint."""
     return {
         "message": "Welcome to AuraHR - The Next-Generation AI-Powered HRMS",
         "version": settings.VERSION,
-        "status": "healthy"
-    }
-
-@app.get("/health")
-async def health_check():
-    """Detailed health check endpoint."""
-    from app.services.ai_service import ai_service
-    return {
         "status": "healthy",
-        "version": settings.VERSION,
-        "services": {
-            "database": "connected",
-            "ai_service": "ready",
-            "vector_db": "connected",
-            "gemini": ai_service.gemini_model_name or "fallback",
-        }
+        "health": "/health",
     }
 
 if __name__ == "__main__":
